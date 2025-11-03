@@ -3,7 +3,7 @@ import Lotto from "../Lotto.js";
 
 export function validatePrice(price) {
   if (isNaN(price) || price <= 0 || price % 1000 !== 0) {
-    throw new Error(`${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.PRICE}`);
+    throw new Error(ERROR_MESSAGES.PRICE);
   }
 
   return price;
@@ -20,13 +20,11 @@ export function validateBonusNumber(winnerLotto, inputBonus) {
   const bonusNumber = Number(inputBonus.trim());
 
   if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
-    throw new Error(`${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.BONUS_RANGE}`);
+    throw new Error(ERROR_MESSAGES.BONUS_RANGE);
   }
 
   if (winnerLotto.getNumbers().includes(bonusNumber)) {
-    throw new Error(
-      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.BONUS_DUPLICATE}`
-    );
+    throw new Error(ERROR_MESSAGES.BONUS_DUPLICATE);
   }
   return bonusNumber;
 }

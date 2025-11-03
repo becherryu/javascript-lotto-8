@@ -10,9 +10,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error(
-        `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.LOTTO_LENGTH}`
-      );
+      throw new Error(ERROR_MESSAGES.LOTTO_LENGTH);
     }
 
     const duplicateNumber = numbers.filter(
@@ -21,9 +19,7 @@ class Lotto {
 
     if (duplicateNumber.length > 0) {
       throw new Error(
-        `${ERROR_MESSAGES.PREFIX}] ${
-          ERROR_MESSAGES.LOTTO_DUPLICATE
-        } : ${duplicates.join(", ")}`
+        `${ERROR_MESSAGES.LOTTO_DUPLICATE} : ${duplicateNumber.join(", ")}`
       );
     }
 
@@ -37,7 +33,7 @@ class Lotto {
           number === ""
       )
     ) {
-      throw new Error(`${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.LOTTO_RANGE}`);
+      throw new Error(ERROR_MESSAGES.LOTTO_RANGE);
     }
   }
 
