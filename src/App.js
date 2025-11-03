@@ -7,7 +7,11 @@ import {
 } from "./utils/input.js";
 import { generateLotto, printLottos } from "./utils/generateLotto.js";
 
-import { validatePrice } from "./utils/validation.js";
+import {
+  validateBonusNumber,
+  validateLottoNumber,
+  validatePrice,
+} from "./utils/validation.js";
 
 import { ERROR_MESSAGES } from "./utils/constants.js";
 
@@ -21,7 +25,10 @@ class App {
       printLottos(lottos);
 
       const inputLottoNumbers = await getLottoNumbers();
+      const winnerLotto = validateLottoNumber(inputLottoNumbers);
+
       const inputBonusNumber = await getBonusNumber();
+      const bonusNumber = validateBonusNumber(winnerLotto, inputBonusNumber);
     } catch (error) {
       Console.print(`${ERROR_MESSAGES.PREFIX} ${error.message}`);
       throw new Error(`${ERROR_MESSAGES.PREFIX} ${error.message}`);
