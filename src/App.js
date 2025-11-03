@@ -6,12 +6,12 @@ import {
   getBonusNumber,
 } from "./utils/input.js";
 import { generateLotto, printLottos } from "./utils/generateLotto.js";
-
 import {
   validateBonusNumber,
   validateLottoNumber,
   validatePrice,
 } from "./utils/validation.js";
+import { calculateResult } from "./utils/calculateResult.js";
 
 import { ERROR_MESSAGES } from "./utils/constants.js";
 
@@ -29,9 +29,15 @@ class App {
 
       const inputBonusNumber = await getBonusNumber();
       const bonusNumber = validateBonusNumber(winnerLotto, inputBonusNumber);
+
+      calculateResult(lottos, winnerLotto, bonusNumber);
     } catch (error) {
-      Console.print(`${ERROR_MESSAGES.PREFIX} ${error.message}`);
-      throw new Error(`${ERROR_MESSAGES.PREFIX} ${error.message}`);
+      if (!error.message.startsWith("[ERROR]")) {
+        Console.print(`[ERROR] ${error.message}`);
+      } else {
+        Console.print(error.message);
+      }
+      return;
     }
   }
 }
